@@ -14,31 +14,72 @@ function getComputerChoice(){
     }
 }
 
-getComputerChoice();
+// getComputerChoice();
 
-let userSelection = prompt("What's your move? Rock Paper or Scissors?");
-console.log(userSelection);
+let userSelection;
+let playerSelection;
+
+function getUserChoice() {
+    userSelection = prompt("What's your move? Rock Paper or Scissors?");
+    playerSelection = userSelection.toLowerCase();
+    console.log(playerSelection);
+    return playerSelection
+}
+
+// getUserChoice();
+
+
+let replay = false;
 
 function whoWon() {
-    if (userSelection == "rock" && interimChoice == "rock") {
+    if (playerSelection == "rock" && interimChoice == "rock") {
         console.log("It's a draw")
-    } else if (userSelection == "rock" && interimChoice == "scissors") {
+        replay = true;
+        return replay;
+    } else if (playerSelection == "rock" && interimChoice == "scissors") {
         console.log("You've won!")
-    } else if (userSelection == "rock" && interimChoice == "paper") {
+    } else if (playerSelection == "rock" && interimChoice == "paper") {
         console.log("You've lost!")
-    } else if (userSelection == "paper" && interimChoice == "paper") {
+    } else if (playerSelection == "paper" && interimChoice == "paper") {
         console.log("It's a draw")
-    } else if (userSelection == "paper" && interimChoice == "scissors") {
+        replay = true;
+        return replay;
+    } else if (playerSelection == "paper" && interimChoice == "scissors") {
         console.log("You've lost")
-    } else if (userSelection == "paper" && interimChoice == "rock") {
+    } else if (playerSelection == "paper" && interimChoice == "rock") {
         console.log("You've won")
-    } else if (userSelection == "scissors" && interimChoice == "scissors") {
+    } else if (playerSelection == "scissors" && interimChoice == "scissors") {
         console.log("It's a draw")
-    } else if (userSelection == "scissors" && interimChoice == "rock") {
+        replay = true;
+        return replay;
+    } else if (playerSelection == "scissors" && interimChoice == "rock") {
         console.log("You've lost")
-    } else if (userSelection == "scissors" && interimChoice == "paper") {
+    } else if (playerSelection == "scissors" && interimChoice == "paper") {
         console.log("You've won")
     }
 }
 
-whoWon();
+// whoWon();
+
+function tieBreaker () {
+    replay = false;
+    getComputerChoice();
+    userSelection = prompt("That round was a draw\nRock Paper or Scissors?");
+    playerSelection = userSelection.toLowerCase();
+    console.log(playerSelection);
+    whoWon();
+}
+
+if (replay = true) {
+    tieBreaker();
+}
+
+function playRound () {
+    getComputerChoice();
+    getUserChoice();
+    whoWon();
+}
+
+playRound();
+
+// Need to work on putting all functions into play round function
