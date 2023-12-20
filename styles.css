@@ -1,0 +1,78 @@
+@font-face {
+    font-family: MagicRetro;
+    src: url(Magic\ Retro.ttf);
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    font-family: MagicRetro;
+}
+
+#rps-title h1 {
+    font-size: 60px;
+    font-weight: 500;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#player-buttons {
+    display: flex;
+    gap: 100px;
+    margin: 100px;
+}
+
+#score-tracker {
+    display: flex;
+    gap: 300px;
+}
+
+#player-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#player-score h1,
+#computer-score h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 40px;
+    font-weight: lighter;
+}
+
+#computer-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#player-score p,
+#computer-score p {
+    margin: 0;
+    padding: 0;
+    font-size: 60px;
+}
+
+#rock,
+#paper,
+#scissors {
+    font-size: 30px;
+    padding:15px;
+    border-radius: 40px;
+    height: 80px;
+    width: 200px;
+}
+
+#round-status {
+    margin: 60px;
+    font-size: 30px;
+    font-weight: 100;
+}
+

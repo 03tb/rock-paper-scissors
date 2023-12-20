@@ -2,14 +2,36 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <script src="myscripts.js"></script>
+        <script src="myscripts.js" defer></script>
+        <link rel="stylesheet" href ="styles.css">
         <title>Rock Paper Scissors</title>
     </head>
     <body>
-        <div id="game-script">
-            <script>
-                gameLaunch();
-            </script>
+        <div id="container">
+            <div id="rps-title">
+                <h1>Rock Paper Scissors</h1>                
+            </div>
+            <div id="score-tracker">
+                <div id="player-score">
+                    <h1>Your score</h1>
+                    <p id="start-player-score">0</p>
+                </div>
+                <div id="computer-score">
+                    <h1>Computers Score</h1>
+                    <p id="start-computer-score">0</p>
+                </div>
+            </div>
+            <div id="round-status">
+                Choose a move below to start the game!
+            </div>
+            <div id="alignment-div">
+                <div id="player-buttons">
+                    <button id="rock">ROCK</button>
+                    <button id="paper">PAPER</button>
+                    <button id="scissors">SCISSORS</button>
+                </div>
+            </div>
+            <button id="restart-button">Restart Game</button>
         </div>
     </body>
 </html>

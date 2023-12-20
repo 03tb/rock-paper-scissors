@@ -1,5 +1,3 @@
-// Computer move generator //
-
 let computerSelection;
 
 function getComputerChoice(){
@@ -12,88 +10,128 @@ function getComputerChoice(){
         computerSelection = "scissors";
     }
 }
-//*************************************//
 
-// Selects users move //
+
 let userSelection;
 let playerSelection;
+const rockButton = document.getElementById('rock');
+const paperButton = document.getElementById('paper');
+const scissorsButton = document.getElementById('scissors');
+const playerScoreTracker = document.querySelector('#player-score');
+const computerScoreTracker = document.querySelector('#computer-score');
+const playerScoreDisplay = document.querySelector('#start-player-score');
+const computerScoreDisplay = document.querySelector('#start-computer-score');
 
-function getUserChoice() {
-    userSelection = prompt("What's your move? Rock Paper or Scissors?");
-    playerSelection = userSelection.toLowerCase();
-    console.log(playerSelection);
-    return playerSelection
-}
+rockButton.addEventListener('click', () => {
+    userSelection = 'rock'
+    playerSelection = userSelection;
+    getComputerChoice();
+    whoWon();   
+    checkScore();
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+    playerScoreTracker.appendChild(playerScoreDisplay);
+    computerScoreTracker.appendChild(computerScoreDisplay);
+});
 
-//*************************************//
 
 
-// Calculates who won the round & score tracker //
+paperButton.addEventListener('click', () => {
+    userSelection = 'paper'
+    playerSelection = userSelection;
+    getComputerChoice();
+    whoWon(); 
+    checkScore();
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+    playerScoreTracker.appendChild(playerScoreDisplay);
+    computerScoreTracker.appendChild(computerScoreDisplay);
+});
+
+
+
+scissorsButton.addEventListener('click', () => {
+    userSelection = 'scissors'
+    playerSelection = userSelection;
+    getComputerChoice();
+    whoWon();
+    checkScore();
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+    playerScoreTracker.appendChild(playerScoreDisplay);
+    computerScoreTracker.appendChild(computerScoreDisplay);
+});
+   
 
 let replay = false;
 let computerScore = 0;
 let playerScore = 0;
+const statusMessage = document.querySelector('#round-status');
+
 
 function whoWon() {
     if (playerSelection == "rock" && computerSelection == "rock") {
-        replayRound();
+        statusMessage.textContent = 'The round was a draw';
     } else if (playerSelection == "rock" && computerSelection == "scissors") {
         playerScore = playerScore + 1;
-        alert("You chose: " + userSelection + " the Computer chose: " + computerSelection +"\nYou win!\nPlayer Score: " + playerScore + " Computer Score: " + computerScore);
+        statusMessage.textContent = 'You won the round ' + playerSelection + ' beats ' + computerSelection;
     } else if (playerSelection == "rock" && computerSelection == "paper") {
         computerScore = computerScore + 1;
-        alert("You chose: " + userSelection + " the Computer chose: " + computerSelection +"\nYou lose!\nPlayer Score: " + playerScore + " Computer Score: " + computerScore);
+        statusMessage.textContent = 'You lost the round ' + computerSelection + ' beats ' + playerSelection;
     } else if (playerSelection == "paper" && computerSelection == "paper") {
-        replayRound();
+        statusMessage.textContent = 'The round was a draw';
     } else if (playerSelection == "paper" && computerSelection == "scissors") {
         computerScore = computerScore + 1;
-        alert("You chose: " + userSelection + " the Computer chose: " + computerSelection +"\nYou lose!\nPlayer Score: " + playerScore + " Computer Score: " + computerScore);
+        statusMessage.textContent = 'You lost the round ' + computerSelection + ' beats ' + playerSelection;
     } else if (playerSelection == "paper" && computerSelection == "rock") {
         playerScore = playerScore + 1;
-        alert("You chose: " + userSelection + " the Computer chose: " + computerSelection +"\nYou win!\nPlayer Score: " + playerScore + " Computer Score: " + computerScore);
+        statusMessage.textContent = 'You won the round ' + playerSelection + ' beats ' + computerSelection;
     } else if (playerSelection == "scissors" && computerSelection == "scissors") {
-        replayRound();
-        return replay;
+        statusMessage.textContent = 'The round was a draw';
     } else if (playerSelection == "scissors" && computerSelection == "rock") {
         computerScore = computerScore + 1;
-        alert("You chose: " + userSelection + " the Computer chose: " + computerSelection +"\nYou lose!\nPlayer Score: " + playerScore + " Computer Score: " + computerScore);
+        statusMessage.textContent = 'You lost the round ' + computerSelection + ' beats ' + playerSelection;
     } else if (playerSelection == "scissors" && computerSelection == "paper") {
         playerScore = playerScore + 1;
-        alert("You chose: " + userSelection + " the Computer chose: " + computerSelection +"\nYou win!\nPlayer Score: " + playerScore + " Computer Score: " + computerScore);
+        statusMessage.textContent = 'You won the round ' + playerSelection + ' beats ' + computerSelection;
     }
 }
 
 
-//*************************************//
-
-//Tie breaker situation function//
-
-function replayRound() {
-        alert("That round was a draw");
-        getComputerChoice();
-        getUserChoice();
-        whoWon();
-        return replay;
-}
-
-//*************************************//
-
-//Function to play round//
-function playRound () {
-    getComputerChoice();
-    getUserChoice();
-    whoWon();
-}
-
-//*************************************//
-
-function gameLaunch() {
-    while (playerScore <5 && computerScore <5) {
-        playRound();
-    }
+function checkScore() {
     if (playerScore > computerScore) {
-        alert("Congratulations! You beat the computer!\nFinal Score\nPlayer Score: " + playerScore + " Computer Score: " + computerScore)
+        if (playerScore == 5) {
+            statusMessage.textContent = 'Congratulations, you won!';
+            return
+        }
     } else {
-        alert("Game Over! Computer wins!\nFinal Score\nPlayer Score: " + playerScore + " Computer Score: " + computerScore)
-    }
+        if (computerScore == 5) {
+            statusMessage.textContent = 'Game Over! Computer wins!';
+            return
+        } 
+    } 
+} 
+
+
+const restartButton = document.querySelector('#restart-button')
+
+restartButton.addEventListener ('click', () => {
+    statusMessage.textContent = 'Game reset, choose a move to play';
+    resetGame();
+})
+
+
+function resetGame () {
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+    playerScoreTracker.appendChild(playerScoreDisplay);
+    computerScoreTracker.appendChild(computerScoreDisplay);
 }
+
+
+// ideas for future improvement
+// consider adding confirmation button on restart game
+// something like insert new div with two buttons with a message "are you sure you want to restart?"
+// adding another if statement where if the result was a consecutive draw, the message says "that was another draw"
